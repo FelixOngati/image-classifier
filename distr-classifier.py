@@ -93,7 +93,7 @@ negative_examples = negative_examples[0:N_TO_VISUALIZE, :, :]
 # visualize_data(positive_examples, negative_examples)
 
 # hyperparameter
-N_LAYERS = 4
+N_LAYERS = 8
 
 
 def cnn(size, n_layers):

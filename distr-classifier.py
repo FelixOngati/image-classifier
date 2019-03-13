@@ -134,6 +134,7 @@ def cnn(size, n_layers):
     # Add output layer
     model.add(Dense(1))
     model.add(Activation('sigmoid'))
+    model.load_weights('models/in/epoch-models.hdf5')
 
     # Compile the model
     model.compile(loss='binary_crossentropy',

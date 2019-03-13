@@ -9,7 +9,7 @@ from keras.callbacks import EarlyStopping, TensorBoard, ModelCheckpoint
 from sklearn.metrics import accuracy_score, f1_score
 from datetime import datetime
 
-IMAGE_PATH = 'planesnet/'
+IMAGE_PATH = 'data/'
 
 file_paths = glob.glob(path.join(IMAGE_PATH, '*.png'))
 
@@ -165,7 +165,7 @@ tensorboard = TensorBoard(log_dir=log_dir, write_graph=True, write_images=True)
 
 # callback to save model at the every epoch
 model_save_file = 'epoch-model.hdf5'
-save_model = ModelCheckpoint(model_save_file, monitor='val_loss', verbose=0, save_best_only=True, save_weights_only=False, mode='auto', period=1)
+save_model = ModelCheckpoint(model_save_file, monitor='loss', verbose=0, save_best_only=True, save_weights_only=False, mode='auto', period=1)
 
 # Place the callbacks in a list
 callbacks = [early_stopping, tensorboard, save_model]

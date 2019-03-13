@@ -5,7 +5,7 @@ import os.path as path
 import matplotlib.pyplot as plt
 from keras.models import Sequential
 from keras.layers import Activation, Dropout, Flatten, Dense, Conv2D, MaxPooling2D
-from keras.callbacks import EarlyStopping, TensorBoard
+from keras.callbacks import EarlyStopping, TensorBoard, ModelCheckpoint
 from sklearn.metrics import accuracy_score, f1_score
 from datetime import datetime
 
@@ -163,8 +163,12 @@ now = datetime.utcnow().strftime("%Y%m%d%H%M%S")
 log_dir = "{}/run-{}/".format(LOG_DIRECTORY_ROOT, now)
 tensorboard = TensorBoard(log_dir=log_dir, write_graph=True, write_images=True)
 
+# callback to save model at the every epoch
+model_save_file = 'epoch-model.hdf5'
+save_model = ModelCheckpoint(model_save_file, monitor='val_loss', verbose=0, save_best_only=True, save_weights_only=False, mode='auto', period=1)
+
 # Place the callbacks in a list
-callbacks = [early_stopping, tensorboard]
+callbacks = [early_stopping, tensorboard, save_model]
 
 # Train the model
 model.fit(x_train, y_train, epochs=EPOCHS, batch_size=BATCH_SIZE, callbacks=callbacks, verbose=0)
